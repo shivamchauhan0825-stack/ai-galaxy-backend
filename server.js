@@ -8,9 +8,9 @@ const app = express();
 app.use(cors());
 app.use(express.json({ limit: "2mb" }));
 
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY
-});
+const openai = process.env.OPENAI_API_KEY
+  ? new OpenAI({ apiKey: process.env.OPENAI_API_KEY })
+  : null;
 
 app.get("/", (req, res) => {
   res.send("AI Galaxy backend is running!");
